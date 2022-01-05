@@ -7,7 +7,7 @@ class Game {
   }
 
   init() {
-    while (this.turnLeft > 0 && this.players.filter(p => p.state == "loser").length < this.players.length - 1) {
+    while (this.turnLeft > 0 && this.players.filter(p => p.state == "loser").length < this.players.length - 1 && this.players[0].state != "loser" ) {
       this.newTurn(this.players);
     }
     console.log("c fini loul");

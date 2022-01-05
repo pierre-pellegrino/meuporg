@@ -15,7 +15,6 @@ class Character {
   }
 
   takeDamage(amount) {
-    console.log(`${this.name} reçoit ${amount - this.shield} ${amount - this.shield > 1 ? "dégâts" : "dégât"}.`);
     if (this.hp - (amount - this.shield) <= 0) {
       this.hp = 0;
       this.state = "loser";
@@ -27,6 +26,7 @@ class Character {
   }
 
   dealDamage(victim) {
+    console.log(`${this.name} inflige ${this.dmg - victim.shield} ${this.dmg - victim.shield > 1 ? "dégâts" : "dégât"} à ${victim.name}.`);
     victim.takeDamage(this.dmg);
   }
 
@@ -37,6 +37,7 @@ class Character {
       console.log(`${this.name} réduit les dégâts de ${this.spShield} ce tour.`);
     }
     if (this.spDmg > 0) {
+      console.log(`${this.name} inflige ${this.spDmg - victim.shield} ${this.spDmg - victim.shield > 1 ? "dégâts" : "dégât"} à ${victim.name}.`);
       victim.takeDamage(this.spDmg);
     }
     if (this.spHeal > 0) {

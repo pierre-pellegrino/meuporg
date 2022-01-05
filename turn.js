@@ -7,23 +7,30 @@ class Turn {
   playerTarget() {
     let playerChoice = 0;
     this.players.filter((p, i) => i > 0).map((p, i) => console.log(`${i+1} - ${p.name} : ${p.hp}pdv.`))
-    while (playerChoice <1 || playerChoice > this.players.length - 1) {
+    while (isNaN(playerChoice) || playerChoice <1 || playerChoice > this.players.length - 1) {
       playerChoice = window.prompt("Choisissez votre cible. (Voir console)");
+      parseInt(playerChoice, 10);
     }
     return playerChoice;
   }
 
+  npcTarget(index) {
+    let targetPool = this.players.filter(p => p !== this.players[index]);    
+    this.players[index].dealDamage(targetPool[Math.floor(Math.random() * targetPool.length)]);
+  }
+
   init() {
     let whoseTurn = 0;
-    this.players = this.players.filter(p => p.state != "loser");
     while (whoseTurn < this.players.length) {
-      this.players[whoseTurn].state != "loser" ? console.log(`C'est au tour de ${this.players[whoseTurn].name}.`) : null;
+      this.players = this.players.filter(p => p.state != "loser");
+      typeof this.players[whoseTurn] !== 'undefined' && this.players[whoseTurn].state != "loser" ? console.log(`C'est au tour de ${this.players[whoseTurn].name}.`) : null;
       // Players turn
       if (whoseTurn == 0) {
         let playerChoice = 0;
         console.log(`Attaque spéciale : ${this.players[whoseTurn].spName} - ${this.players[whoseTurn].spDesc}`)
-        while (playerChoice < 1 || playerChoice > 4) {
+        while (isNaN(playerChoice) || playerChoice < 1 || playerChoice > 3) {
           playerChoice = window.prompt("Tapez 1 pour attaquer, 2 pour lancer votre attaque spéciale ou 3 pour voir l'état des joueurs.");
+          parseInt(playerChoice, 10);
         }
         switch (parseInt(playerChoice, 10)) {
           case 1: 
@@ -35,9 +42,11 @@ class Turn {
         }
       }
       // NPC turn(s)
-      else if (this.players[whoseTurn].state != "loser"){
-        this.players[whoseTurn].dealDamage(this.players[0]);
+      else if (typeof this.players[whoseTurn] !== 'undefined' && this.players[whoseTurn].state != "loser"){
+        this.npcTarget(whoseTurn);
+        // this.players[whoseTurn].dealDamage(this.players[1]);
       }
+      console.log(" ");
       whoseTurn++;    
     }
     // End of turn effects
