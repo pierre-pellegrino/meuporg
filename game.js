@@ -10,7 +10,9 @@ class Game {
     while (this.turnLeft > 0 && this.players.filter(p => p.state == "loser").length < this.players.length - 1 && this.players[0].state != "loser" ) {
       this.newTurn(this.players);
     }
-    console.log("c fini loul");
+    console.log("Partie terminée.");
+    let winners = this.players.filter(p => p.state != "loser");
+    winners.length >= 1 ? (winners.forEach(w => console.log(`${w.name} ressort victorieux.`))) : console.log("F");
   }
 
   newTurn(player) {

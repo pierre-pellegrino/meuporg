@@ -14,10 +14,14 @@ class Turn {
     return playerChoice;
   }
 
-  npcTarget(index) {
+  npcTarget(index) { 
     let targetPool = this.players.filter(p => p !== this.players[index]);
-    if (this.players[index].mana >= this.players[index].spCost && Math.floor(Math.random() * 6 + 1) < 5) {
-      console.log("WESH")
+    let killablePool = targetPool.filter(p => p.hp <= this.players[index].dmg);
+    // (Merci de ne pas voler mon algorithme génétique ci-dessous, google en pls)
+    if (killablePool.length > 0) {
+      this.players[index].dealDamage(killablePool[0]);
+    }
+    else if (this.players[index].mana >= this.players[index].spCost && Math.floor(Math.random() * 6 + 1) < 5) {
       this.players[index].special(targetPool[Math.floor(Math.random() * targetPool.length)]);
     }
     else {    
