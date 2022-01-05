@@ -27,7 +27,8 @@ class Turn {
       // Players turn
       if (whoseTurn == 0) {
         let playerChoice = 0;
-        console.log(`Attaque spéciale : ${this.players[whoseTurn].spName} - ${this.players[whoseTurn].spDesc}`)
+        console.log(`PV : ${this.players[whoseTurn].hp} - Mana : ${this.players[whoseTurn].mana}`);
+        console.log(`Attaque spéciale : ${this.players[whoseTurn].spCost} Mana - ${this.players[whoseTurn].spName} - ${this.players[whoseTurn].spDesc}`);
         while (isNaN(playerChoice) || playerChoice < 1 || playerChoice > 3) {
           playerChoice = window.prompt("Tapez 1 pour attaquer, 2 pour lancer votre attaque spéciale ou 3 pour voir l'état des joueurs.");
           parseInt(playerChoice, 10);
@@ -44,7 +45,6 @@ class Turn {
       // NPC turn(s)
       else if (typeof this.players[whoseTurn] !== 'undefined' && this.players[whoseTurn].state != "loser"){
         this.npcTarget(whoseTurn);
-        // this.players[whoseTurn].dealDamage(this.players[1]);
       }
       console.log(" ");
       whoseTurn++;    
