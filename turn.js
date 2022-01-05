@@ -4,10 +4,20 @@ class Turn {
     this.init();
   }
 
+  playerTarget() {
+    let playerChoice = 0;
+    this.players.filter((p, i) => i > 0).map((p, i) => console.log(`${i+1} - ${p.name} : ${p.hp}pdv.`))
+    while (playerChoice <1 || playerChoice > this.players.length - 1) {
+      playerChoice = window.prompt("Choisissez votre cible. (Voir console)");
+    }
+    return playerChoice;
+  }
+
   init() {
     let whoseTurn = 0;
-    while (whoseTurn < this.players.filter(p => p.state != "loser").length) {
-      console.log(`C'est au tour de ${this.players[whoseTurn].name}.`);
+    this.players = this.players.filter(p => p.state != "loser");
+    while (whoseTurn < this.players.length) {
+      this.players[whoseTurn].state != "loser" ? console.log(`C'est au tour de ${this.players[whoseTurn].name}.`) : null;
       // Players turn
       if (whoseTurn == 0) {
         let playerChoice = 0;
@@ -17,15 +27,15 @@ class Turn {
         }
         switch (parseInt(playerChoice, 10)) {
           case 1: 
-            this.players[whoseTurn].dealDamage(this.players[whoseTurn+1]);
+            this.players[whoseTurn].dealDamage(this.players[this.playerTarget()]);
           break;
           case 2: 
-            this.players[whoseTurn].special(this.players[whoseTurn+1]);
+            this.players[whoseTurn].special(this.players[this.playerTarget()]);
           break;
         }
       }
       // NPC turn(s)
-      else {
+      else if (this.players[whoseTurn].state != "loser"){
         this.players[whoseTurn].dealDamage(this.players[0]);
       }
       whoseTurn++;    
