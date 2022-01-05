@@ -15,8 +15,14 @@ class Turn {
   }
 
   npcTarget(index) {
-    let targetPool = this.players.filter(p => p !== this.players[index]);    
-    this.players[index].dealDamage(targetPool[Math.floor(Math.random() * targetPool.length)]);
+    let targetPool = this.players.filter(p => p !== this.players[index]);
+    if (this.players[index].mana >= this.players[index].spCost && Math.floor(Math.random() * 6 + 1) < 5) {
+      console.log("WESH")
+      this.players[index].special(targetPool[Math.floor(Math.random() * targetPool.length)]);
+    }
+    else {    
+      this.players[index].dealDamage(targetPool[Math.floor(Math.random() * targetPool.length)]);
+    }
   }
 
   init() {

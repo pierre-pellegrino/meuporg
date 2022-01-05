@@ -33,7 +33,7 @@ class Character {
   }
 
   special(victim) {
-    if (this.mana > this.spCost) {
+    if (this.mana >= this.spCost) {
       this.mana -= this.spCost;
       console.log(`${this.name} lance ${this.spName}.`);
       if (this.spShield > 0) {
@@ -51,8 +51,11 @@ class Character {
       if (this.spBoost > 0) {
         this.dmg += 1;
         console.log(`${this.name} gagne ${this.spBoost} dégât permanent.`);
-        this.hp > 1 ? this.hp -= 1 : null;
-        console.log(`${this.name} s'inflige 1 point de dégât.`);
+        if (this.hp > 1) {
+          this.hp -= 1;
+          console.log(`${this.name} s'inflige 1 point de dégât.`);
+        }
+        
       }
     }
     else {
