@@ -11,8 +11,9 @@ class Turn {
       // Players turn
       if (whoseTurn == 0) {
         let playerChoice = 0;
-        while (playerChoice < 1 || playerChoice > 2) {
-          playerChoice = window.prompt("Tapez 1 pour attaquer.");
+        console.log(`Attaque spéciale : ${this.players[whoseTurn].spName} - ${this.players[whoseTurn].spDesc}`)
+        while (playerChoice < 1 || playerChoice > 4) {
+          playerChoice = window.prompt("Tapez 1 pour attaquer, 2 pour lancer votre attaque spéciale ou 3 pour voir l'état des joueurs.");
         }
         switch (parseInt(playerChoice, 10)) {
           case 1: 
