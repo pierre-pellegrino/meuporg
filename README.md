@@ -1,5 +1,5 @@
 ![MEUPORG](img/image.png)
-
+(Meuporg étant le nom barbare qui désigne les jeux de rôle en ligne auxquels on prend part avec d'autres compagnons virtuels (tuels) ).
 [LE LIEN DU JEU](https://pierre-pellegrino.github.io/meuporg/)
 
 
