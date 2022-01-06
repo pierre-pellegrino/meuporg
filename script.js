@@ -4,40 +4,46 @@ const charaDiv = document.querySelector(".character-select-div");
 
 const charaHp = document.querySelector(".characters-hp");
 const charaMana = document.querySelector(".characters-mana");
+const charaDmg = document.querySelector(".characters-dmg");
 const charaSp = document.querySelector(".characters-sp");
-
-// let p1 = new Fighter;
-// let p2 = new Monk;
-// let p3 = new Assassin;
-
-// g = new Game([p1,p2,p3]);
 
 charaInput.addEventListener("change", e => {
   switch (charaInput.value) {
     case '0':
       charaHp.innerText = "12";
       charaMana.innerText = "40";
-      charaSp.innerText = "Vision sombre (20 mana) - Inflige 5 dégâts. Réduit de 2 les dégâts subis pour le tour."
+      charaDmg.innerText = "4";
+      charaSp.innerText = "Vision sombre (20 mana) - Inflige 4 dégâts. Réduit de 2 les dégâts subis pour le tour."
     break;
     case '1':
-      charaHp.innerText = "16";
+      charaHp.innerText = "14";
       charaMana.innerText = "160";
-      charaSp.innerText = "Éclair de soin (25 mana) - Inflige 4 dégâts. Soigne 5 points de vie."
+      charaDmg.innerText = "3";
+      charaSp.innerText = "Éclair de soin (40 mana) - Inflige 3 dégâts. Soigne 3 points de vie."
     break;
     case '2':
       charaHp.innerText = "8";
-      charaMana.innerText = "200";
-      charaSp.innerText = "Imposition des mains (40 mana) - Soigne 8 points de vie."
+      charaMana.innerText = "100";
+      charaDmg.innerText = "2";
+      charaSp.innerText = "Imposition des mains (25 mana) - Soigne 5 points de vie."
     break;
     case '3':
-      charaHp.innerText = "8";
+      charaHp.innerText = "18";
       charaMana.innerText = "0";
+      charaDmg.innerText = "4";
       charaSp.innerText = "Rage (0 mana) - Inflige +1 dégât permanent. Vous inflige 1 point de vie."
     break;
     case '4':
       charaHp.innerText = "6";
       charaMana.innerText = "20";
-      charaSp.innerText = "Frappe de l'ombre (20 mana) - Inflige 7 dégâts. Vous rend insensible aux dégâts ce tour."
+      charaDmg.innerText = "6";
+      charaSp.innerText = "Frappe de l'ombre (20 mana) - Inflige 6 dégâts. Vous rend insensible aux dégâts ce tour."
+    break;
+    case '5':
+      charaHp.innerText = "9";
+      charaMana.innerText = "60";
+      charaDmg.innerText = "4";
+      charaSp.innerText = "Douce ballade (40 mana) - Lance un chant enchanteur. Inflige 7 dégâts."
     break;
   }
 })
@@ -61,6 +67,9 @@ charaBtn.addEventListener("click", e => {
     case '4':
       p1 = new Assassin;
     break;
+    case '5':
+      p1 = new Bard;
+    break;
   }
 
   let enemy1 = enemyPool[Math.floor(Math.random()*enemyPool.length)]
@@ -79,6 +88,9 @@ charaBtn.addEventListener("click", e => {
     break;
     case 4:
       p2 = new Assassin;
+    break;
+    case 5:
+      p2 = new Bard;
     break;
   }
 
@@ -99,6 +111,9 @@ charaBtn.addEventListener("click", e => {
     break;
     case 4:
       p3 = new Assassin;
+    break;
+    case 5:
+      p3 = new Bard;
     break;
   }
 

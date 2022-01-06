@@ -39,8 +39,8 @@ class Turn {
       typeof this.players[whoseTurn] !== 'undefined' && this.players[whoseTurn].state != "loser" ? console.log(`C'est au tour de ${this.players[whoseTurn].name}.`) : null;
       // Players turn
       if (whoseTurn == 0) {
-        gameText.innerHTML = `<p> PV : <span class="bolder">${this.players[whoseTurn].hp}</span> - Mana : <span class="bolder">${this.players[whoseTurn].mana}</span> </p>`;
-        console.log(`PV : ${this.players[whoseTurn].hp} - Mana : ${this.players[whoseTurn].mana}`);
+        gameText.innerHTML = `<p> PV : <span class="bolder">${this.players[whoseTurn].hp}</span> - Mana : <span class="bolder">${this.players[whoseTurn].mana}</span> - Dégâts : <span class="bolder">${this.players[whoseTurn].dmg}</span> </p>`;
+        console.log(`PV : ${this.players[whoseTurn].hp} - Mana : ${this.players[whoseTurn].mana} - Dégâts : ${this.players[whoseTurn].dmg}`);
         gameText.innerHTML += `<p> Attaque spéciale : <span class="bolder">${this.players[whoseTurn].spCost}</span> Mana - ${this.players[whoseTurn].spName} - ${this.players[whoseTurn].spDesc} </p>`;
         console.log(`Attaque spéciale : ${this.players[whoseTurn].spCost} Mana - ${this.players[whoseTurn].spName} - ${this.players[whoseTurn].spDesc}`);
       this.showEnemiesStats();
