@@ -27,6 +27,18 @@
     <p class="bolder"> Spécial : <span class="characters-sp normal">Vision sombre (20 mana) - Inflige 5 dégâts. Réduit de 2 les dégâts subis pour le tour.</span></p>
     <button type="button" id="characters-btn">Baston !</button>
   </div>
+
+  <div class="game-div hidden">
+    <p class="turns-left">Il reste 10 tours.</p>
+    <div class="game-text"></div>
+    <div class="game-enemies-infos"></div>
+    <div class="game-fight-infos"></div>
+    <div class="game-btns">
+      <select id="enemies-target"></select>
+      <button type="button" id="attack-btn">Attaque classique</button>
+      <button type="button" id="special-btn">Attaque spéciale</button>
+    </div>
+  </div>
   
   <script src="character.js"></script>
   <script src="turn.js"></script>

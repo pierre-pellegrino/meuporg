@@ -1,17 +1,9 @@
 class Turn {
-  constructor(players) {
+  constructor(players, atkType, targetedEnemy) {
     this.players = players;
+    this.atkType = atkType;
+    this.targetedEnemy = targetedEnemy;
     this.init();
-  }
-
-  playerTarget() {
-    let playerChoice = 0;
-    this.players.filter((p, i) => i > 0).map((p, i) => console.log(`${i+1} - ${p.name} : ${p.hp}pdv.`))
-    while (isNaN(playerChoice) || playerChoice <1 || playerChoice > this.players.length - 1) {
-      playerChoice = window.prompt("Choisissez votre cible. (Voir console)");
-      parseInt(playerChoice, 10);
-    }
-    return playerChoice;
   }
 
   npcTarget(index) { 
@@ -29,29 +21,44 @@ class Turn {
     }
   }
 
+  showEnemiesStats() {
+    const enemiesDiv = document.querySelector(".game-enemies-infos");
+    enemiesDiv.innerHTML = "";
+    this.players.filter((p,i) => i > 0).map(p => {
+      enemiesDiv.innerHTML += `<p> ${p.name} : ${p.hp}PV`;
+    })
+  }
+
   init() {
+    const gameText = document.querySelector(".game-text");
+    const attackBtn = document.getElementById("attack-btn");
+    const specialBtn = document.getElementById("special-btn");
     let whoseTurn = 0;
     while (whoseTurn < this.players.length) {
       this.players = this.players.filter(p => p.state != "loser");
       typeof this.players[whoseTurn] !== 'undefined' && this.players[whoseTurn].state != "loser" ? console.log(`C'est au tour de ${this.players[whoseTurn].name}.`) : null;
       // Players turn
       if (whoseTurn == 0) {
-        let playerChoice = 0;
+        gameText.innerHTML = `<p> PV : <span class="bolder">${this.players[whoseTurn].hp}</span> - Mana : <span class="bolder">${this.players[whoseTurn].mana}</span> </p>`;
         console.log(`PV : ${this.players[whoseTurn].hp} - Mana : ${this.players[whoseTurn].mana}`);
+        gameText.innerHTML += `<p> Attaque spéciale : <span class="bolder">${this.players[whoseTurn].spCost}</span> Mana - ${this.players[whoseTurn].spName} - ${this.players[whoseTurn].spDesc} </p>`;
         console.log(`Attaque spéciale : ${this.players[whoseTurn].spCost} Mana - ${this.players[whoseTurn].spName} - ${this.players[whoseTurn].spDesc}`);
-        while (isNaN(playerChoice) || playerChoice < 1 || playerChoice > 3) {
-          playerChoice = window.prompt("Tapez 1 pour attaquer, 2 pour lancer votre attaque spéciale ou 3 pour voir l'état des joueurs.");
-          parseInt(playerChoice, 10);
-        }
-        switch (parseInt(playerChoice, 10)) {
-          case 1: 
-            this.players[whoseTurn].dealDamage(this.players[this.playerTarget()]);
+      this.showEnemiesStats();
+
+       switch (this.atkType) {
+        // case 0 is state of the game before first turn.
+        case 0:
+          whoseTurn = this.players.length;
           break;
-          case 2: 
-            this.players[whoseTurn].special(this.players[this.playerTarget()]);
-          break;
-        }
+        case 1:
+          this.players[whoseTurn].dealDamage(this.players[this.targetedEnemy]);
+        break;
+        case 2:
+          this.players[whoseTurn].special(this.players[this.targetedEnemy]);
+        break;
+       }
       }
+
       // NPC turn(s)
       else if (typeof this.players[whoseTurn] !== 'undefined' && this.players[whoseTurn].state != "loser"){
         this.npcTarget(whoseTurn);

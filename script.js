@@ -103,6 +103,7 @@ charaBtn.addEventListener("click", e => {
   }
 
   charaDiv.classList.add("hidden");
+  document.querySelector('.game-div').classList.remove("hidden");
   
   g = new Game([p1,p2,p3]);
 })

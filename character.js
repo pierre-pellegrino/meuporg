@@ -12,53 +12,67 @@ class Character {
     this.spBoost = spBoost;
     this.spCost = spCost;
     this.spDesc = spDesc;
+    this.gameTextDiv = document.querySelector(".game-fight-infos");
   }
 
   takeDamage(attacker, amount) {
-    if (this.hp - (amount - this.shield) <= 0) {
-      this.hp = 0;
-      this.state = "loser";
-      console.log(`${this.name} est mort.`);
-      attacker.mana += 20;
-      console.log(`${attacker.name} gagne 20 de mana.`);
-    }
-    else {
-      this.hp -= (amount - this.shield);
+    if (amount >= this.shield) {
+      if (this.hp - (amount - this.shield) <= 0) {
+        this.hp = 0;
+        this.state = "loser";
+        this.gameTextDiv.innerHTML += `<p>${this.name} est mort.</p>`;
+        console.log(`${this.name} est mort.`);
+        attacker.mana += 20;
+        this.gameTextDiv.innerHTML += `<p>${attacker.name} gagne 20 de mana.</p>`;
+        console.log(`${attacker.name} gagne 20 de mana.`);
+      }
+      else {
+        this.hp -= (amount - this.shield);
+      }
     }
   }
 
   dealDamage(victim) {
-    console.log(`${this.name} inflige ${this.dmg - victim.shield} ${this.dmg - victim.shield > 1 ? "dégâts" : "dégât"} à ${victim.name}.`);
+    this.gameTextDiv.innerHTML += `<p>${this.name} inflige ${this.dmg - victim.shield > 0 ? this.dmg : 0} ${this.dmg - victim.shield > 1 ? "dégâts" : "dégât"} à ${victim.name}.</p>`;
+    console.log(`${this.name} inflige ${this.dmg - victim.shield > 0 ? this.dmg : 0} ${this.dmg - victim.shield > 1 ? "dégâts" : "dégât"} à ${victim.name}.`);
     victim.takeDamage(this, this.dmg);
+    this.gameTextDiv.innerHTML += `<p style="margin-bottom:16px"></p>`;
   }
 
   special(victim) {
     if (this.mana >= this.spCost) {
       this.mana -= this.spCost;
+      this.gameTextDiv.innerHTML += `<p>${this.name} lance ${this.spName}.</p>`;
       console.log(`${this.name} lance ${this.spName}.`);
       if (this.spShield > 0) {
         this.shield += this.spShield;
+        this.gameTextDiv.innerHTML += `<p>${this.name} réduit les dégâts de ${this.spShield} ce tour.</p>`;
         console.log(`${this.name} réduit les dégâts de ${this.spShield} ce tour.`);
       }
       if (this.spDmg > 0) {
+        this.gameTextDiv.innerHTML += `<p>${this.name} inflige ${this.spDmg - victim.shield > 0 ? this.spDmg : 0} ${this.spDmg - victim.shield > 1 ? "dégâts" : "dégât"} à ${victim.name}.</p>`;
         console.log(`${this.name} inflige ${this.spDmg - victim.shield} ${this.spDmg - victim.shield > 1 ? "dégâts" : "dégât"} à ${victim.name}.`);
         victim.takeDamage(this, this.spDmg);
       }
       if (this.spHeal > 0) {
         this.hp += this.spHeal;
+        this.gameTextDiv.innerHTML += `<p>${this.name} récupère ${this.spHeal} points de vie.</p>`;
         console.log(`${this.name} récupère ${this.spHeal} points de vie.`);
       }
       if (this.spBoost > 0) {
         this.dmg += 1;
+        this.gameTextDiv.innerHTML += `<p>${this.name} gagne ${this.spBoost} dégât permanent.</p>`;
         console.log(`${this.name} gagne ${this.spBoost} dégât permanent.`);
         if (this.hp > 1) {
           this.hp -= 1;
+          this.gameTextDiv.innerHTML += `<p>${this.name} s'inflige 1 point de dégât.</p>`;
           console.log(`${this.name} s'inflige 1 point de dégât.`);
         }
-        
       }
+      this.gameTextDiv.innerHTML += `<p style="margin-bottom:16px"></p>`;
     }
     else {
+      this.gameTextDiv.innerHTML += `<p>N'ayant pas assez de mana, vous lancez une attaque normale.</p>`;
       console.log(`N'ayant pas assez de mana, vous lancez une attaque normale.`);
       this.dealDamage(victim);
     }

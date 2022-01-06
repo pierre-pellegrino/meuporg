@@ -33,7 +33,7 @@ input, select, button {
   display: none!important;
 }
 
-.character-select-div {
+.character-select-div, .game-div {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,6 +52,37 @@ input, select, button {
 
 .character-select-div button {
   margin-top: 12px;
+}
+
+.game-div {
+  margin-top: 12px;
+}
+
+.game-div p:first-of-type {
+  font-size: 1.1em;
+}
+
+.game-text {
+  margin: 6px 0;
+}
+
+.game-btns button:first-of-type {
+  margin-bottom: 6px;
+}
+
+#enemies-target {
+  margin-bottom: 6px;
+}
+
+.game-enemies-infos {
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border: 1px solid rgba(0,0,0,0.5);
+  padding: 2px 12px;
+  margin-bottom: 4px;
 }
 
 button {
