@@ -50,7 +50,7 @@ charaInput.addEventListener("change", e => {
 
 charaBtn.addEventListener("click", e => {
   let p1, p2, p3;
-  let enemyPool = [0,1,2,3,4].filter(e => e != charaInput.value);
+  let enemyPool = [0,1,2,3,4,5].filter(e => e != charaInput.value);
   switch (charaInput.value) {
     case '0':
       p1 = new Fighter;
@@ -94,7 +94,7 @@ charaBtn.addEventListener("click", e => {
     break;
   }
 
-  enemyPool = [0,1,2,3,4].filter(e => e != enemy1 && e != charaInput.value);
+  enemyPool = [0,1,2,3,4,5].filter(e => e != enemy1 && e != charaInput.value);
   let enemy2 = enemyPool[Math.floor(Math.random()*enemyPool.length)]
   switch (enemy2) {
     case 0:
