@@ -36,10 +36,21 @@ class Game {
         targetedEnemy = 1;
         this.updateEnemiesList();
       }
-      else if (this.turnLeft <= 0 || this.players.filter(p => p.state == "loser").length >= this.players.length - 1 || this.players[0].state == "loser") {
+      if (this.turnLeft <= 0 || this.players.filter(p => p.state == "loser").length >= this.players.length - 1 || this.players[0].state == "loser") {
+        document.querySelector(".game-end").classList.remove("hidden");
+        document.querySelector(".game-end").innerHTML += "Partie terminée !";
         console.log("Partie terminée.");
         let winners = this.players.filter(p => p.state != "loser");
+        winners.length >= 1 ? (winners.forEach(w => document.querySelector(".game-end").innerHTML += `<p>${w.name} ressort victorieux.</p>`)) : null;
         winners.length >= 1 ? (winners.forEach(w => console.log(`${w.name} ressort victorieux.`))) : console.log("F");
+        atkBtn.classList.add("hidden");
+        speBtn.classList.add("hidden");
+        enemiesList.classList.add("hidden");
+        document.querySelector(".game-enemies-infos").classList.add("hidden");
+        document.querySelector(".game-end").innerHTML += `<p><button class='replay-btn'>Rejouer</button></p>`;
+        document.querySelector(".replay-btn").addEventListener('click', e => {
+          location.reload();
+        })
       }
     })
 
@@ -53,10 +64,21 @@ class Game {
         targetedEnemy = 1;
         this.updateEnemiesList();
       }
-      else if (this.turnLeft <= 0 || this.players.filter(p => p.state == "loser").length >= this.players.length - 1 || this.players[0].state == "loser") {
+      if (this.turnLeft <= 0 || this.players.filter(p => p.state == "loser").length >= this.players.length - 1 || this.players[0].state == "loser") {
+        document.querySelector(".game-end").classList.remove("hidden");
+        document.querySelector(".game-end").innerHTML += "Partie terminée !";
         console.log("Partie terminée.");
         let winners = this.players.filter(p => p.state != "loser");
+        winners.length >= 1 ? (winners.forEach(w => document.querySelector(".game-end").innerHTML += `<p>${w.name} ressort victorieux.</p>`)) : null;
         winners.length >= 1 ? (winners.forEach(w => console.log(`${w.name} ressort victorieux.`))) : console.log("F");
+        atkBtn.classList.add("hidden");
+        speBtn.classList.add("hidden");
+        enemiesList.classList.add("hidden");
+        document.querySelector(".game-enemies-infos").classList.add("hidden");
+        document.querySelector(".game-end").innerHTML += `<p><button class='replay-btn'>Rejouer</button></p>`;
+        document.querySelector(".replay-btn").addEventListener('click', e => {
+          location.reload();
+        })
       }
     })
   }

@@ -23,17 +23,19 @@ input, select, button {
 
 .bolder {
   font-weight: bolder;
+  color:#E48000;
 }
 
 .normal {
   font-weight: normal;
+  color: #000;
 }
 
 .hidden {
   display: none!important;
 }
 
-.character-select-div, .game-div {
+.character-select-div, .game-div, .game-end {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,6 +52,15 @@ input, select, button {
   text-align: center;
 }
 
+.game-end {
+  position: absolute;
+  margin: 30% auto;
+  background-color: #fff;
+  z-index: 999;
+  font-size: 1.3em;
+  box-shadow: 0 0 900rem 900rem rgba(0,0,0,0.5);
+}
+
 .character-select-div button {
   margin-top: 12px;
 }
@@ -62,8 +73,10 @@ input, select, button {
   font-size: 1.1em;
 }
 
-.game-text {
-  margin: 6px 0;
+.game-text, .game-fight-infos {
+  margin: 6px 0 18px;
+  padding: 0 0 6px;
+  border-bottom: 1px solid rgba(0,0,0,0.3);
 }
 
 .game-btns button:first-of-type {
